@@ -94,7 +94,9 @@ func parseMarkers(markers string) ([]*Marker, error) {
 			}
 			markerType, err := markerTypeFromString(key)
 			if err != nil {
-				return nil, fmt.Errorf("invalid marker key '%s': %v", key, err)
+				fmt.Printf("Skipping unknown marker type: %s\n", key)
+				buffer.Reset()
+				continue
 			}
 			currentMarker = &Marker{MarkerType: markerType, Key: key}
 			buffer.Reset()
